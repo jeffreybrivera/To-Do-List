@@ -6,7 +6,7 @@ const MAX_ITEMS = 5;
         const inputElement = document.getElementById("input");
         const value = inputElement.value.trim();
         if (value) {
-          const itemElement = document.createElement("li");
+          let itemElement = document.createElement("li");
           const textElement = document.createElement("span");
           textElement.textContent = value;
           itemElement.appendChild(textElement);
@@ -19,7 +19,17 @@ const MAX_ITEMS = 5;
               addButton.disabled = false;
             }
           });
+          const editButton = document.createElement("button");
+          editButton.textContent = "Edit";
+          editButton.classList.add("edit");
+          editButton.addEventListener("click", () => {
+            const editText = prompt("Enter the updated task:", textElement.textContent);
+            if (editText) {
+              textElement.textContent = editText;
+            }
+          });
           itemElement.appendChild(closeButton);
+          itemElement.appendChild(editButton);
           listElement.appendChild(itemElement);
           inputElement.value = "";
           if (listElement.children.length >= MAX_ITEMS) {
@@ -27,4 +37,6 @@ const MAX_ITEMS = 5;
           }
         }
       }
+      
+      
       
